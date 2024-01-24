@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #chart-container {
+      width: 800px;
+      height: 300px;
+      padding-right: 10px;
+      position: relative;
+      border: 5px solid black; /* Added black border with 5px thickness */
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .bar {
+      width: 20%;
+      height: 100%; /* Set initial height to 100% */
+      position: absolute;
+      bottom: 0;
+      background-color: rgba(93, 31, 237, 0.833);
+      transition: height 0.5s ease-in-out;
+    }
+
+    .bar:nth-child(2) { left: 20%; background-color: rgb(205, 35, 196); }
+    .bar:nth-child(3) { left: 40%; background-color: rgb(235, 29, 122); }
+    .bar:nth-child(4) { left: 60%; background-color: rgb(241, 127, 13); }
+    .bar:nth-child(5) { left: 80%; background-color: rgb(216, 169, 12); }
+
+    button {
+      margin: 30px;
+      padding: 5px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <div id="chart-container">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <div class="button-container">
+    <button onclick="startAnimation()" style="background-color: green;">Start</button>
+    <button onclick="resetAnimation()" style="background-color:rgba(93, 31, 237, 0.833);">Reset</button>
+    <button onclick="stopAnimation()" style="background-color: red;">Stop</button>
+  </div>
+</div>
+
+<script>
+  let animationInterval;
+
+  function startAnimation() {
+    stopAnimation();
+    let bars = document.querySelectorAll('.bar');
+    animationInterval = setInterval(() => {
+      bars.forEach((bar, index) => {
+        bar.style.height = (Math.random() * 150) + 'px';
+      });
+    }, 1000);
+  }
+  
+  function resetAnimation() {
+    stopAnimation();
+    let bars = document.querySelectorAll('.bar');
+    animationInterval = setInterval(() => {
+      bars.forEach(bar => {
+        bar.style.height = '100%';
+      });
+    }, 10);
+  }
+  
+  
+
+  function stopAnimation() {
+    clearInterval(animationInterval);
+  }
+</script>
+
+</body>
+</html>
+
+
+
